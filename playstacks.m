@@ -33,10 +33,10 @@ while isempty(get(gcf, 'UserData'))
     [xx,yy]=meshgrid(get(gca, 'XTick'),get(gca, 'yTick'));
     plot(xx, yy, 'r.');
     hold off;
-    colormap(gray);
+    %colormap(gray);
+    colormap(jet);
   end
   drawnow;
-  fprintf('x');
 end
 set(gcf, 'color', [.8 .8 .8]);
 set(gcf, 'UserData', []);

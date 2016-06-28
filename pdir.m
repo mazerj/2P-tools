@@ -13,7 +13,7 @@ function r = pdir(s, r)
 % to:
 dirs = linspace(0,360,13); dirs = dirs(1:end-1);
 
-ca = roi_extract(s, r);
+[~, ca] = roi_extract(s, r);
 x = [];
 y = [];
 for n = 1:length(s.stim_onsets)

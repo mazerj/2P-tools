@@ -60,7 +60,6 @@ if opts.lscan
   stack.g(isnan(x)) = NaN;
 
   % pull normalized red channel to look for TTL signals
-  %r = s(:,:,(1+(nframes/2)):end) ./ bitshift(1,16);
   r = s(:,:,(1+(nframes/2)):end);
   r = r ./ (max(r(:)) - min(r(:)));
   stack.ttl = [];
@@ -71,6 +70,13 @@ if opts.lscan
     else
       stack.ttl(n) = 0;
     end
+  end
+  if stack.ttl(1) == 1
+    % this is not really right -- makes sync correct, but
+    % first stimulus should really be discarded because onset
+    % time is not really known.
+    warning('ttl starting high, forcing low');
+    stack.ttl(1:10) = 0
   end
   stack.stim_onsets = find(diff(stack.ttl) == 1);
   stack.stim_offsets = find(diff(stack.ttl) == -1);
